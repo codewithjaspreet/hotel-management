@@ -20,7 +20,7 @@ async def root():
 @app.post("/create-booking/", response_model=_schemas._Booking)
 async def create_booking(
 
-    user: _schemas._BookingBase,
+    user: _schemas._Booking,
 
     db: _orm.Session = _fastapi.Depends(_services.getdb)
 
