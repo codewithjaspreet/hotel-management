@@ -1,6 +1,6 @@
-from typing import List
-import  pydantic as _pydantic
-import datetime as _datetime
+import pydantic
+
+import _datetime as _datetime
 
 class _Booking(pydantic.BaseModel):
     room_id: int
@@ -9,16 +9,9 @@ class _Booking(pydantic.BaseModel):
     end_time: _datetime.datetime
     total_price: float
 
-
-    class config:
+    class Config:
         orm_mode = True
 
 
-class _BookingBase(_pydantic.BaseModel):
+class _BookingBase(pydantic.BaseModel):
     room_id: int
-    
-
-
-
-
-

@@ -2,12 +2,14 @@
 
 import fastapi as _fastapi
 
-
-app = _fastapi.FastAPI()
-
 import schemas as _schemas
 import services as _services
 import sqlalchemy.orm as _orm
+
+
+app = _fastapi.FastAPI()
+
+_services.create_database()
 
 
 @app.get("/")
@@ -15,8 +17,7 @@ async def root():
     return {"message": "Hello World"}
 
 
-
-@app.post("/create-booking/" , response_model=_schemas._Booking)
+@app.post("/create-booking/", response_model=_schemas._Booking)
 async def create_booking(
 
     user: _schemas._BookingBase,
@@ -26,8 +27,15 @@ async def create_booking(
 
 ):
 
-    db_booking = _services.get_user_by_roomNo(db=db, roomNo=user.room_id)
+    db_booking = _services.get_user_by_roomNo(db=db, roomNo=user.room_id) and (_services.get_user_by_start_time(
+        db=db, roomNo=user.start_time) or _services.get_user_by_end_time(db=db, roomNo=user.end_time))
 
+    if db_booking:
+
+        raise _fastapi.HTTPException(
+            status_code=400, detail="Room is already booked for this time period")
+
+    return _services.create_booking(db=db, booking=user)
 
 # @app.post('/bookings')
 # def book_room(room_number: int, start_time: datetime, end_time: datetime, user_email: str, db: Session = Depends(get_db)):

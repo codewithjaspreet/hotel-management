@@ -30,7 +30,7 @@ class Booking(_database.Base):
 
 
     id = _sql.Column(_sql.Integer, primary_key=True)
-    room_id = _sql.Column(_sql.Integer, _sql.ForeignKey('rooms.id'))
+    room_id = _sql.Column(_sql.Integer, _sql.ForeignKey('users.id'))
 
     user_email = _sql.Column(_sql.String, nullable=False)
     start_time = _sql.Column(_sql.DateTime, nullable=False)

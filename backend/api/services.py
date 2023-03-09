@@ -1,8 +1,9 @@
 import sqlalchemy.orm as _orm
 
-import models as _models
-import schemas as _schemas
-import database as _database
+
+import datetime as _datetime
+
+import models as _models, schemas as _schemas, database as _database
 
 
 def create_database():
@@ -44,3 +45,11 @@ def create_booking(db: _orm.Session, booking: _schemas._BookingBase):
 
 def get_user_by_roomNo(db: _orm.Session, roomNo: int):
     return db.query(_models.Booking).filter(_models.Booking.room_id == roomNo).first()
+
+
+def get_user_by_start_time(db: _orm.Session, start_time: _datetime.datetime):
+    return db.query(_models.Booking).filter(_models.Booking.start_time == start_time).first()
+
+
+def get_user_by_end_time(db: _orm.Session, end_time: _datetime.datetime):
+    return db.query(_models.Booking).filter(_models.Booking.end_time == end_time).first()
