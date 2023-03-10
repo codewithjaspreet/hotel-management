@@ -22,7 +22,7 @@ const Grid = () => {
     {
       id: 1,
       title: "Card 1",
-      image: "https://source.unsplash.com/random/800x601/?Cryptocurrency&1",
+      image: "https://source.unsplash.com/random/800x601",
       description: "Description for card 1",
     },
     {
