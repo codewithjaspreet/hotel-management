@@ -21,7 +21,7 @@ class User(_database.Base):
     bookings = _orm.relationship('Booking', back_populates='room')
 
 
-
+    
 
 
 class Booking(_database.Base):
@@ -43,6 +43,3 @@ class Booking(_database.Base):
 
 __table_args__ = (UniqueConstraint('room_id', 'start_time',
                   'end_time', name='no_overlapping_bookings'),)
-
-
-

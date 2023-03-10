@@ -3,7 +3,9 @@ import sqlalchemy.orm as _orm
 
 import datetime as _datetime
 
-import models as _models, schemas as _schemas, database as _database
+import models as _models
+import schemas as _schemas
+import database as _database
 
 
 def create_database():
@@ -25,21 +27,19 @@ def create_booking(db: _orm.Session, booking: _schemas._BookingBase):
 
     db_booking = _models.Booking(
 
-        room_id  = booking.room_id,
-        user_email = booking.user_email,
+        room_id=booking.room_id,
+        user_email=booking.user_email,
 
-        start_time = booking.start_time,
-        end_time = booking.end_time,
-        total_price = booking.total_price
+        start_time=booking.start_time,
+        end_time=booking.end_time,
 
 
-    );
-
+    )
 
     db.add(db_booking)
     db.commit()
     db.refresh(db_booking)
-    
+
     return db_booking
 
 

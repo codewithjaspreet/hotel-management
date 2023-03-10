@@ -2,6 +2,7 @@ import pydantic
 
 import _datetime as _datetime
 
+
 class _Booking(pydantic.BaseModel):
     room_id: int
     user_email: str
