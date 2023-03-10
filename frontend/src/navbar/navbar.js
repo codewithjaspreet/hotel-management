@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../utils/logo.jpg";
 import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
@@ -6,12 +7,12 @@ const NavBar = () => {
       <div class="container flex flex-wrap items-center justify-between mx-auto">
         <a href="https://flowbite.com/" class="flex items-center">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src= {logo}
             class="h-6 mr-3 sm:h-9"
             alt="Flowbite Logo"
           />
           <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
+            Hotel Management Admin Panel
           </span>
         </a>
         <button

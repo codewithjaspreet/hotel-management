@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 
 const Card = ({ title, subtitle, price , image, roomNo }) => {
   
@@ -24,6 +25,28 @@ const Card = ({ title, subtitle, price , image, roomNo }) => {
 };
 
 const Home = () => {
+
+  const [rooms, setRooms] = useState([]);
+
+
+    useEffect(() => {
+
+      const fetchRooms = async () => {
+
+        const response = await fetch("http://127.0.0.1:8000/rooms");
+
+        const data = await response.json();
+
+        console.log(data);
+
+        setRooms(data);
+
+      };
+
+      fetchRooms();
+
+    }, []);
+
   const cards = [
     {
       id: 1,
