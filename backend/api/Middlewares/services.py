@@ -3,8 +3,8 @@ import sqlalchemy.orm as _orm
 
 import datetime as _datetime
 
-import models as _models
-import schemas as _schemas
+import backend.api.Models.models as _models
+import backend.api.Schemas.schemas as _schemas
 import database as _database
 
 
