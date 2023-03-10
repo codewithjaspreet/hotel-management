@@ -5,6 +5,7 @@ import Home from "./components/home/home";
 import NavBar from "./navbar/navbar";
 import { Route, Routes } from "react-router-dom";
 import DeleteBooking from "./DeleteBooking/DeleteBooking";
+import Detail from "./DetailPage/Detail";
 const App = () => {
   return (
     <div>
@@ -15,6 +16,8 @@ const App = () => {
         <Route path="/edit" element={<EditBooking />} />
 
         <Route path="/delete" element={<DeleteBooking />} />
+
+        <Route path="/details" element={<Detail />} />
       </Routes>
     </div>
   );
