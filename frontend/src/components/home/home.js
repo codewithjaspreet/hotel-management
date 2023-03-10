@@ -17,12 +17,13 @@ const Card = ({ title, image, description }) => {
   );
 };
 
-const Grid = () => {
+
+const Home = () => {
   const cards = [
     {
       id: 1,
       title: "Card 1",
-      image: "https://source.unsplash.com/random/800x601",
+      image: "https://source.unsplash.com/random/800x600",
       description: "Description for card 1",
     },
     {
@@ -84,7 +85,7 @@ const Grid = () => {
   return (
     <div className="flex flex-wrap justify-center gap-4">
       {cards.map((card) => (
-        <div className="w-full md:w-1/5" key={card.id}>
+        <div className="w-full md:w-1/5 p-5" key={card.id}>
           <Card {...card} />
         </div>
       ))}
@@ -92,4 +93,4 @@ const Grid = () => {
   );
 };
 
-export default Grid;
+export default Home;

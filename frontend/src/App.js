@@ -1,13 +1,18 @@
 import React from "react";
 import EditBooking from "./components/EditBooking/Edit";
+import './index.css';
 import Home from "./components/home/home";
-import NavBar from "./components/navbar/navbar";
+import NavBar from "./navbar/navbar";
+import { Route, Routes } from "react-router-dom";
 const App = () => {
   return (
     <div>
-      <EditBooking/>
-      {/* <NavBar/>
-      <Home /> */}
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/edit" element={<EditBooking />} />
+      </Routes>
     </div>
   );
 };
