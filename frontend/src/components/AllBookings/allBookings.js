@@ -1,8 +1,41 @@
-import React from "react";
+import React  ,{ useEffect , useState} from "react";
 import Dropdown from "../../utils/Dropdown";
 
 const All = () => {
+
+
+   const [bookings, setBookings] = useState([]);
+    const [btime, setArray1] = useState([]);
+    const [etime, setArray2] = useState([]);
+
+    useEffect(() => {
+      const fetchRooms = async () => {
+        const response = await fetch("http://127.0.0.1:8000/bookings/");
+
+        const data = await response.json();
+
+        console.log(data);
+
+      
+        data.forEach(function (obj) {
+          btime.push(obj.begin_time);
+          etime.push(obj.end_time);
+        });
+        console.log(btime);
+        console.log(etime);
+        setBookings(bookings);
+        setArray1(btime);
+        setArray2(etime);
+
+        // console.log(rooms);
+      };
+
+      fetchRooms();
+    }, []);
+  
   return (
+
+    
     <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
       <div className="flex justify-between ">
         <div className="flex justify-start item-start space-y-2 flex-col ">
@@ -14,7 +47,7 @@ const All = () => {
           </p>
         </div>
 
-          <Dropdown/>
+        <Dropdown />
       </div>
 
       <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
@@ -43,11 +76,14 @@ const All = () => {
                   </h3>
                   <div className="flex justify-start items-start flex-col space-y-2">
                     <p className="text-sm leading-none text-gray-800">
-                      <span className="text-gray-300">Start Time: </span> 17:00
-                      pm
+                      <span className="text-gray-300">Room No: </span> 101
                     </p>
                     <p className="text-sm leading-none text-gray-800">
-                      <span className="text-gray-300">Size: </span> 20:00 pm
+                      <span className="text-gray-300">Start Time: </span> 
+                       {btime[0]}
+                    </p>
+                    <p className="text-sm leading-none text-gray-800">
+                      <span className="text-gray-300">End Time: </span> {etime[0]}
                     </p>
                   </div>
                 </div>
@@ -76,11 +112,15 @@ const All = () => {
                   </h3>
                   <div className="flex justify-start items-start flex-col space-y-2">
                     <p className="text-sm leading-none text-gray-800">
-                      <span className="text-gray-300">Start Time : </span>2:00
-                      Pm
+                      <span className="text-gray-300">Room No : </span>104
+                      
                     </p>
                     <p className="text-sm leading-none text-gray-800">
-                      <span className="text-gray-300">End Time: </span> 5:00 Pm
+                      <span className="text-gray-300">Start Time : </span>
+                      {btime[1]}
+                    </p>
+                    <p className="text-sm leading-none text-gray-800">
+                      <span className="text-gray-300">End Time: </span> {etime[1]}
                     </p>
                   </div>
                 </div>

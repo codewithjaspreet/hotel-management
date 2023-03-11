@@ -5,6 +5,36 @@ function classNames(...classes) {
 }
 
 export default function DeleteBooking() {
+
+
+  const [bookings, setBookings] = useState([]);
+  const [btime, setArray1] = useState([]);
+  const [etime, setArray2] = useState([]);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      const response = await fetch("http://127.0.0.1:8000/bookings/");
+
+      const data = await response.json();
+
+      console.log(data);
+
+      data.forEach(function (obj) {
+        etime.push(obj.end_time);
+        btime.push(obj.begin_time);
+
+      });
+      console.log(btime);
+      console.log(etime);
+      setBookings(bookings);
+      setArray1(btime);
+      setArray2(etime);
+
+      // console.log(rooms);
+    };
+
+    fetchRooms();
+  }, []);
   return (
     <div className="isolate bg-white py-24 px-6 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
@@ -30,7 +60,7 @@ export default function DeleteBooking() {
             </label>
             <div className="mt-2.5">
               <div className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <h1 className="text-black font-bold ">2: 00 Pm</h1>
+                <h1 className="text-black font-bold ">{btime[0]}</h1>
               </div>
             </div>
           </div>
@@ -43,7 +73,7 @@ export default function DeleteBooking() {
             </label>
             <div className="mt-2.5">
               <div className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <h1 className="text-black font-bold ">6: 00 Pm</h1>
+                <h1 className="text-black font-bold ">{etime[1]}</h1>
               </div>
             </div>
           </div>

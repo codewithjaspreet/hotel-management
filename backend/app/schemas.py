@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 import datetime as dt
 
+
 class BookingBase(BaseModel):
     begin_time: dt.datetime
     end_time: dt.datetime
@@ -17,12 +18,13 @@ class Booking(BookingBase):
     class Config:
         orm_mode = True
 
+
 class UserBase(BaseModel):
     email: str
 
 
 class UserCreate(UserBase):
-    roomNo: int 
+    roomNo: int
 
 
 class User(UserBase):
@@ -31,5 +33,3 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
-
-

@@ -3,7 +3,7 @@ from fastapi import Depends , FastAPI , HTTPException
 import crud , models , schemas
 from sqlalchemy.orm import Session
 from database import SessionLocal , engine
-
+from fastapi.middleware.cors import CORSMiddleware
 from models import Room
 
 
@@ -12,6 +12,18 @@ import random
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+
+# Add your frontend's origin here
+origins = ["http://localhost", "http://localhost:3000"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_db():
