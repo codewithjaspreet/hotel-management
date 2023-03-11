@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal , engine
 from fastapi.middleware.cors import CORSMiddleware
 from models import Room
+import datetime 
 
 
 import random 
@@ -123,3 +124,84 @@ async def get_rooms():
         return {"rooms": [{"id": room.id, "type": room.room_type, "price_per_hour": room.price_per_hour} for room in rooms]}
     finally:
         session.close()
+
+
+# deleting booking yet to be done
+
+# @app.delete("/bookings/{booking_id}")
+# def delete_booking(booking_id: int, db: Session):
+#     booking = db.query(models.Booking).filter(
+#         models.Booking.id == booking_id).first()
+#     if not booking:
+#         raise HTTPException(status_code=404, detail="Booking not found")
+#     if booking.start_time < datetime.now():
+#         raise HTTPException(
+#             status_code=400, detail="Cannot delete past bookings")
+
+#     # Calculate refund amount based on cancellation policy
+#     now = datetime.now()
+#     start = booking.start_time
+#     if (start - now).total_seconds() > 48 * 60 * 60:
+#         refund_percent = 100
+#     elif (start - now).total_seconds() > 24 * 60 * 60:
+#         refund_percent = 50
+#     else:
+#         refund_percent = 0
+#     refund_amount = booking.price * refund_percent / 100
+
+#     # Delete booking from database
+#     db.delete(booking)
+#     db.commit()
+
+#     return {
+#         "message": "Booking deleted successfully",
+#         "refund_percent": refund_percent,
+#         "refund_amount": refund_amount,
+#     }
+
+
+# app- update booking system - was not able to integrate it with frontend
+
+# @router.put("/bookings/{booking_id}")
+# def update_booking(
+#     booking_id: int, booking: schemas.BookingUpdate, db: Session = Depends(get_db)
+# ) -> Dict[str, Any]:
+#     db_booking = crud.get_booking(db, booking_id)
+#     if not db_booking:
+#         raise HTTPException(status_code=404, detail="Booking not found")
+#     if db_booking.start_time < datetime.now():
+#         raise HTTPException(
+#             status_code=400, detail="Cannot update past bookings")
+
+#     room_id = booking.room or db_booking.room_id
+#     email = booking.email or db_booking.email
+#     start_time = booking.start_time or db_booking.start_time
+#     end_time = booking.end_time or db_booking.end_time
+
+#     room = crud.get_room(db, room_id)
+#     if not room:
+#         raise HTTPException(status_code=400, detail="Invalid room id")
+#     room_type = crud.get_room_type(db, room.type_id)
+
+#     hourly_rate = room_type.hourly_rate
+#     duration = (end_time - start_time).total_seconds() / 3600
+#     price = hourly_rate * duration
+
+#     if start_time != db_booking.start_time or end_time != db_booking.end_time or room_id != db_booking.room_id:
+#         overlapping_bookings = crud.get_overlapping_bookings(
+#             db, room_id, start_time, end_time, booking_id
+#         )
+#         if overlapping_bookings:
+#             raise HTTPException(
+#                 status_code=409, detail="The selected room is not available during the requested time period")
+
+#     db_booking.room_id = room_id
+#     db_booking.email = email
+#     db_booking.start_time = start_time
+#     db_booking.end_time = end_time
+#     db_booking.price = price
+
+#     db.commit()
+#     db.refresh(db_booking)
+
+#     return {"message": "Booking updated successfully", "booking": db_booking}
