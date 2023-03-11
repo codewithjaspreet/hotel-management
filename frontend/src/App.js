@@ -4,8 +4,13 @@ import './index.css';
 import Home from "./components/home/home";
 import NavBar from "./navbar/navbar";
 import { Route, Routes } from "react-router-dom";
-import DeleteBooking from "./DeleteBooking/DeleteBooking";
-import Detail from "./DetailPage/Detail";
+import DeleteBooking from "./components/DeleteBooking/DeleteBooking";
+
+
+// import Detail from "./components/DetailBooking/DetailBooking";
+import All from "./components/AllBookings/allBookings";
+
+import Details from "./components/DetailPage/Detail";
 const App = () => {
   return (
     <div>
@@ -17,7 +22,9 @@ const App = () => {
 
         <Route path="/delete" element={<DeleteBooking />} />
 
-        <Route path="/details" element={<Detail />} />
+        <Route path="/details" element={<Details />} />
+
+        <Route path="/allBookings" element={<All />} />
       </Routes>
     </div>
   );
